@@ -1,0 +1,83 @@
+---
+title:  'Statistics I / Quiz #1'
+author: 'John Garza'
+date:   'Spring 2019'
+output: pdf_document
+geometry: margin = 0.3in
+---
+
+\fontsize{16}{18}
+\selectfont
+
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(knitr)
+library(plotly)
+library(tidyr)
+library(magrittr)
+library(Deriv)
+opts_chunk$set(
+  echo    = TRUE,
+  eval    = TRUE,
+  comment = '',
+  prompt  = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  error   = FALSE,
+  fig.height = 8,
+  fig.width  = 8,
+  fig.align  = 'center')
+```
+
+# Introduction
+In this quiz you will make a scatter plot and add a regression line to the plot.  You must fill in the missing codes and knit your finished markdown file into a pdf document and submit it to me on canvas.  Good luck! I look forward to seeing your work. :) $\Delta, \Gamma, \delta, \xi, \beta$
+
+
+
+```{r}
+# Clear the environment
+rm(list = ls())
+
+# View the first few rows of the mtcars dataset
+head(mtcars) %>% kable()
+
+# Create a Scatter plot for disp nd hp with the line of best fit
+G <- 
+  ggplot(
+    data = mtcars) +     
+  geom_point(
+    mapping = aes(x = disp, y = hp, col = as.factor(cyl)),
+    size    = 4,
+    shape   = 'circle',
+    alpha   = 0.8) +
+  geom_smooth(
+    mapping = aes(x = disp, y = hp),
+    method  = 'lm',
+    se      = FALSE,
+    col     = 'black')+
+  labs(
+    title    = 'Horse Power and Displacement by Number of Cylinders',
+    subtitle = NULL,
+    caption  = 'Statistics I / Quiz 1',
+    x        = 'Displacement',
+    y        = 'Horse Power',
+    col      = 'Cylinders') +
+  theme( 
+    legend.position = c(0.1, 0.85),
+    title = 
+      element_text(
+        size   = 14, 
+        face   = 'bold', 
+        color  = 'black',
+        family = 'serif'),
+    axis.text = 
+      element_text(
+        size   = 12, 
+        face   = 'bold', 
+        color  = 'black',
+        family = 'serif'))
+
+# View the plot
+G
+```
